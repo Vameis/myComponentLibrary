@@ -1,0 +1,20 @@
+
+// bem
+
+$namespace: 'el';
+@mixin b($block) {
+  $B: $namespace + '-' + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+
+// 添加ben后缀啥的
+@mixin when($state) {
+  $state-prefix:'is-';
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
