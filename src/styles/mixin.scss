@@ -6,7 +6,7 @@ $--footer-padding: 0 20px !default;
 $--main-padding: 20px !default;
 
 @mixin b($block) {
-  $B: $namespace +'-'+$block !global;
+  $B: $namespace + '-'+$block !global;
 
   .#{$B} {
     @content;
