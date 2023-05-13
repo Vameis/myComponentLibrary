@@ -1,6 +1,9 @@
 // bem
 
 $namespace: 'el';
+$element-separator: '__';
+$modifier-separator: '--';
+$state-prefix: 'is-';
 $--header-padding: 0 20px !default;
 $--footer-padding: 0 20px !default;
 $--main-padding: 20px !default;
@@ -122,7 +125,7 @@ $--button-large-padding-vertical: 15px !default;
 $--button-large-padding-horizontal: 25px !default;
 
 @mixin b($block) {
-  $B: $namespace + '-'+$block !global;
+  $B: $namespace +'-'+$block !global;
 
   .#{$B} {
     @content;
@@ -131,7 +134,6 @@ $--button-large-padding-horizontal: 25px !default;
 
 // 添加ben后缀啥的
 @mixin when($state) {
-  $state-prefix: 'is-';
 
   @at-root {
     &.#{$state-prefix + $state} {
@@ -140,10 +142,22 @@ $--button-large-padding-horizontal: 25px !default;
   }
 }
 
-@mixin button-size($padding-vertical,
-  $padding-horizontal,
-  $font-size,
-  $border-radius) {
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: '';
+
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ','};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   border-radius: $border-radius;
